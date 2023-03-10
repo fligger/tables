@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <Forms>
+    <SpooferFligger Class="TCEForm" Encoding="Ascii85">=VD_ATU8jxPm)q[Z_$){;oyFmf_Rwk;uMVnYhKzVuFbOExFM6ZC(?^2=d]qw-qW=2)pD#PGMMNT]oRxwYV9UlrwHnY)F^aoh%j[aP.5c.Lz(;0epu}]:jNtqn//kykikO/^oiwb:l_UQ:}MFQX;LO)9O]J]!rt{^S=Mq42V@-.lnzlyB#2VbN#fL0VKV!PkVsO}EHZ]V0aL4=?PH7bNz*UC62Gh+.iHNyiXN:ghj4/Jb^I-Gu6AQ7vs_+DC@Qegib@-G;hM*$[sB_(D1oRfsdh)1.8Q9k^ar+FT.1YnN,g@mqVj@2V9JXJs31$]ZP}Y1on2n1j}o]F#2N58v)X%0Q6Lh^C9;/!tAVUq!FnI2+ml!{(@-GfWMDt}Zzq}zD-{$=8Vc=%vQ@udEDHF2-3S%5Y9EV^twfbSe=Z7J5%9Ug!+AcX^=U17OPMJ;]q]mpKDVnyQu@Dj[ATROyS@y9c:[=.i#LCnnr0Oy7QdfnhiBUy/p{kjJk6ZGX$(JY/}qj8G/,3e%x[h-2(K1r3lSQRPBK}r7}p#vJ}6Vq$f2;7u1m_WJKk!aKUj!^p9BpWG-%ME=?YH%k2LKze;ZY%ws]0G!n,-l+W2DW^qf_.hg-kyom/+.!Flv-,p^kpS:zq2[Qc$$S6+}X^Jb*20}Am_0R/FLKmi35P)T3%6i]3]1r$(}0R/G$yNNDLRipHtx%t.)lRM7M*S?(G8Z;Coph4fUPVb%]Y5HLKK*Pt%)tLOD,*DYt)bX=0,aLQby=JVGwD6}Q4z2i*T^+LG-uOcJp/mxy:rOe9zO;N(+Y;#1f*!YS6/C24Sb-H-fz_)Rg(un!G-%MEL4+FU8U}f[33zPu$Ej!uqsQD!2dBO*zFcBVpVUr2dWN05ah#pFxLspm?ivR451g7bRLv_M*/!%7=LprKPwz_IUdb!UD(eX(j;Pt8W3ri?B0eb)1+9-m]#f0TEGl*2LpY?)ZJ4$[CQ$R!?{Ls%Wrk;tW!V^8W2H7iYjkHPXsZm=E/D@xqy$YGYb;m2Qk#F{w(YdSt?KSx7*SPM1F%L@5GKRaT,[TW-rC?5ZK!*V-iqs+T4GIg5z@dPx2v)y6[2})B.FLW?I;S)R.aPY%4D]Ax:)ZP3li.,CF,$$S;d;-:n-,WZ@M;8Y-@6I9$AbbWMLUQafFE6]cdJvl$$dt3$rO#)7zqd*k?W}m/mrQ:Wqx4K#$k(=(jOWHhpWu8]=8#+@/9oGfzR;Ps{WALMG0q0^W=tK%,@^79ZG.6#,+=qSx6sh)(;;I4:I2Pr-3(4]GF5Z@2@IA2iUiF0VuTOX%,%h}/UelnMQy9?.pR%UrIVaRyoAU??CH.Cp04wRIJ(]d!3s:@Wi(%Gy7lv#-e5XHWg3_7uqj2FcLhH;K$nbepcM(g.sIRen/%@ro!z/0N,SRFL^o(PZwitEw_a2wm(L%Dd2qR,h;$NGZDp^XO!6ZOa7vBpb_[$X%L*HCXPhGXLyCwC_RHx?Tr?Euc2w^TB</SpooferFligger>
+  </Forms>
+  <CheatEntries/>
+  <UserdefinedSymbols/>
+  <LuaScript>SpooferFligger.YourID.Text = "4abee3d2-e161-33f8-9d80-9d34f4f10461"
+
+getAutoAttachList().add("minecraft.windows.exe")
+SpooferFligger.show()
+
+function replaceString(string_in,string_out)
+   local bytes_in = {};
+   local bytes_out = {};
+   for i=1,(#string_in &gt;= #string_out and #string_in or #string_out) do -- lazy to copy paste same loop for string_out so just looping both and inserting if possible
+      if (i &lt;= #string_in) then
+         table.insert(bytes_in,string.format("%x", tonumber(string.byte(string.sub(string_in,i,i)))));
+      end
+      if (i &lt;= #string_out) then
+         -- table.insert(bytes_out,'0x' .. string.format("%x", tonumber(string.byte(string.sub(string_out,i,i)))));
+         table.insert(bytes_out,tonumber(string.byte(string.sub(string_out,i,i))));
+      end
+   end
+   local object = AOBScan(table.concat(bytes_in," "));
+   if object then
+      for entry = 0, object.Count -1 do
+         writeBytes(object.getString(entry), unpack(bytes_out));
+      end
+      object.destroy();
+      return true
+   end
+   return false
+end
+
+function SpooferFligger_ChangeClick(sender)
+openProcess("minecraft.windows.exe")
+replaceString(control_getCaption(SpooferFligger_YourID),control_getCaption(SpooferFligger_NewID))
+end
+
+
+
+function SpooferFligger_FormClose(sender)
+closeCE()
+end
+
+</LuaScript>
+</CheatTable>
