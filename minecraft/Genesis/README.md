@@ -4,8 +4,8 @@ Project Genesis was my first introduction into game modding and one of the first
 
 Weblinks inside might be outdated. 
 
-### This is really outdated and for old vesions. 
+## This is really outdated and for old game vesions. 
 
-I think the last supported version was somewhere around 1.13.0. 
+I think the last supported version was somewhere around 1.13.0. If you have old CTs of Genesis lying around let me know :)
 
-I coverd many features on youtube: https://www.youtube.com/playlist?list=PLVRYtYhvPXj7v3Mo42FW3vDqluYskAcHE
+I covered many features on youtube: https://www.youtube.com/playlist?list=PLVRYtYhvPXj7v3Mo42FW3vDqluYskAcHE
